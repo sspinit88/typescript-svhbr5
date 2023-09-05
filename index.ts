@@ -15,6 +15,16 @@ async function getData(): Promise<string> {
 let awaitedData: Awaited<ReturnType<typeof getData>>;
 // теперь awaitedData может быть 'hello'
 
+/*
+  ConstructorParameters<Type> - извлекает типы аргументов конструктора Type.
+*/
+
+class Foo {
+  constructor(a: string, b: number) {}
+}
+type FooConstructorParameters = ConstructorParameters<typeof Foo>;
+// теперь FooConstructorParameters это [string, number]
+
 /* 
   Exclude<UnionType, ExcludedMembers> - исключает определенные типы из объединенного типа.
 */
@@ -34,6 +44,16 @@ type B2 = 'a' | 'b';
 type C2 = Extract<A, B>;
 
 const rt: C2 = 'c';
+
+/*
+  InstanceType<Type> - извлекает тип экземпляра класса Type.
+*/
+
+class FooA {
+  x: number;
+}
+type FooInstance = InstanceType<typeof FooA>;
+// теперь FooInstance это { x: number }
 
 /*
   NonNullable<Type> - извлекает тип из Type, исключая null и undefined.
@@ -58,8 +78,12 @@ let omittedPerson: Omit<Person, 'age'> = {
 // теперь omittedPerson может быть { name: string; }
 
 /*
-
+  Parameters<Type> - извлекает типы аргументов функции Type.
 */
+
+function foo(a: string, b: number) {}
+type FooParameters = Parameters<typeof foo>;
+// теперь FooParameters это [string, number]
 
 /* 
   Pick<T, K extends keyof T> - выбирает свойства объекта типа T с ключами, указанными в K. 
@@ -110,6 +134,16 @@ const example: Record<Route, PageInfo> = {
   home: { title: 'home' },
   contact: { title: 'contact' },
 };
+
+/*
+  ReturnType<Type> - извлекает тип возвращаемого значения функции Type.
+*/
+
+function foo1(): string {
+  return 'hello';
+}
+type FooReturnType = ReturnType<typeof foo1>;
+// теперь FooReturnType это string
 
 /* 
   Required<U> - все поля делает обязательными к заполнению.
