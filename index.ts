@@ -36,3 +36,4 @@ interface PageInfo {
 }
 
 type Route = 'home' | 'about' | 'contact';
+
