@@ -43,4 +43,17 @@ const example: Record<Route, PageInfo> = {
   contact: { title: 'contact' },
 };
 
-/* !  */
+/* ! Pick -  */
+
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+type TodoPreview = Pick<Todo, 'title' | 'completed'>;
+
+const todo: TodoPreview = {
+  title: 'Room',
+  completed: true,
+};
