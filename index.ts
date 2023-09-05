@@ -78,6 +78,17 @@ let omittedPerson: Omit<Person, 'age'> = {
 // теперь omittedPerson может быть { name: string; }
 
 /*
+  OmitThisParameter<Type> - определяет функцию без типа this.
+*/
+
+class FooF {
+  x: number;
+  method(this: this): void {}
+}
+type MethodType = OmitThisParameter<FooF['method']>;
+// теперь MethodType это () => void
+
+/*
   Parameters<Type> - извлекает типы аргументов функции Type.
 */
 
@@ -158,3 +169,39 @@ const userData: Required<UserData> = {
   phone: 132,
   addres: 'Street',
 };
+
+/*
+  ThisParameterType<Type> - извлекает тип this из функции Type.
+*/
+
+class FooB {
+  x: number;
+  method(this: this): void {}
+}
+type ThisTypeT = ThisParameterType<FooB['method']>;
+// теперь ThisTypeT это FooB
+
+/*
+  ThisType<Type> - добавляет тип this к функции Type.
+*/
+
+class FooT {
+  x: number;
+  method(): void {}
+}
+type MethodTypeT = ThisType<FooT['method']>;
+// теперь MethodTypeT это (this: FooT) => void
+
+/*
+Uppercase<StringType>, 
+Lowercase<StringType>, 
+Capitalize<StringType>, 
+Uncapitalize<StringType> 
+- это утилитные типы для манипуляции строками,
+  которые изменяют регистр строки в соответствии с их именем. 
+*/
+
+type Uppercased = Uppercase<'hello'>; // 'HELLO'
+type Lowercased = Lowercase<'Hello'>; // 'hello'
+type Capitalized = Capitalize<'hello'>; // 'Hello'
+type Uncapitalized = Uncapitalize<'Hello'>; // 'hello'
