@@ -3,17 +3,12 @@ import './style.css';
 
 //// Utility ////
 
+/* ! Readonly<U> - закрывает поля для редактирования */
+
 interface User {
   name: string;
   age: number;
 }
-
-interface UserData {
-  phone?: number;
-  addres?: string;
-}
-
-/* ! Readonly - закрывает поля для редактирования */
 
 const user: Readonly<User> = {
   name: 'Alex',
@@ -22,14 +17,19 @@ const user: Readonly<User> = {
 
 user.name = 'Tom'; /// Cannot assign to 'name' because it is a read-only property.
 
-/* ! Required - все поля делает обязательными к заполнению */
+/* ! Required<U> - все поля делает обязательными к заполнению */
+
+interface UserData {
+  phone?: number;
+  addres?: string;
+}
 
 const userData: Required<UserData> = {
   phone: 132,
   addres: 'Street',
 };
 
-/* Record -  */
+/* ! Record<Key, Value> - строит объект на основании переданных сущностей  */
 
 interface PageInfo {
   title: string;
@@ -37,3 +37,10 @@ interface PageInfo {
 
 type Route = 'home' | 'about' | 'contact';
 
+const example: Record<Route, PageInfo> = {
+  about: { title: 'about' },
+  home: { title: 'home' },
+  contact: { title: 'contact' },
+};
+
+/* !  */
