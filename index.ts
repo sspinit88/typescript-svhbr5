@@ -3,7 +3,9 @@ import './style.css';
 
 //// Utility ////
 
-/* ! Readonly<U> - закрывает поля для редактирования */
+/* ! 
+     Readonly<T> - делает все свойства объекта типа T доступными только для чтения. 
+*/
 
 interface User {
   name: string;
@@ -17,7 +19,9 @@ const user: Readonly<User> = {
 
 user.name = 'Tom'; /// Cannot assign to 'name' because it is a read-only property.
 
-/* ! Required<U> - все поля делает обязательными к заполнению */
+/* ! 
+     Required<U> - все поля делает обязательными к заполнению.
+ */
 
 interface UserData {
   phone?: number;
@@ -29,7 +33,10 @@ const userData: Required<UserData> = {
   addres: 'Street',
 };
 
-/* ! Record<Key, Value> - строит объект на основании переданных сущностей  */
+/* ! 
+     Record<Key, Value> - создает тип, который является записью с ключами, 
+     определенными в первом параметре, и значениями типа, определенного во втором параметре.
+*/
 
 interface PageInfo {
   title: string;
@@ -43,7 +50,9 @@ const example: Record<Route, PageInfo> = {
   contact: { title: 'contact' },
 };
 
-/* ! Pick -  */
+/* ! 
+     Pick<T, K extends keyof T> - выбирает свойства объекта типа T с ключами, указанными в K. 
+*/
 
 interface Todo {
   title: string;
